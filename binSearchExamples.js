@@ -54,3 +54,25 @@ function floorOfNumber(arr, target){
 
 let ans = floorOfNumber(arr,target);
 console.log(ans); // 14
+
+
+
+/**
+ * https://leetcode.com/problems/find-smallest-letter-greater-than-target/
+ * @param {character[]} letters
+ * @param {character} target
+ * @return {character}
+ */
+var nextGreatestLetter = function(letters, target) {
+    let s = 0, n = letters.length, e = n - 1;
+    while(s <= e){
+        let m = Math.floor((s+e)/2);
+        if(target < letters[m]){
+            e = m - 1;
+        }else{
+            s = m + 1; // it is necessary that this goes in else condition only
+        }
+    }
+    
+    return letters[s%n];
+};
