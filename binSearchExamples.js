@@ -76,3 +76,72 @@ var nextGreatestLetter = function(letters, target) {
     
     return letters[s%n];
 };
+
+/**
+ * https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+//optimized
+var searchRange = function(nums, target) {
+    
+    let first = binSearch(nums, target, true);
+    let last = binSearch(nums, target, false);
+    
+    return [first, last];
+};
+
+
+function binSearch(nums, target, isStart){
+    let s = 0, n = nums.length, e = n - 1;
+    let first = -1, last = -1;
+    let ans = -1;
+    
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+        if(target > nums[m]){
+            s = m + 1;
+        }else if(target < nums[m]){
+            e = m - 1;
+        }else{
+            ans = m;
+            if(isStart){    
+                e = m - 1;
+            }else{
+                s = m + 1;
+            }
+        }
+    }
+    return ans;
+}
+
+// brute force
+function twoPointerSearch(nums, target){
+    let n = nums.length;
+    let lp=0,rp=n-1;
+    let a = [];
+    let s = -1,e = -1;
+    
+    while(lp<n || rp>=0){
+        if(a.length == 2){
+            return a;
+        }
+        if(nums[lp]==target){
+            s = lp;
+            lp = n;
+        }
+        if(nums[rp]==target){
+            e = rp;
+            rp = -1;
+        }
+        lp = lp+1;
+        rp = rp-1;
+    }
+    
+    a.push(s); a.push(e);
+    
+    return a;
+}
+
