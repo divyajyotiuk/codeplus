@@ -153,7 +153,7 @@ function populateArr(arr){ for(let i=0; i<1000;i++){ arr.push(3*i+1); } return a
 
 function searchInfiniteArray(nums, target){
     let s = 0; e = 2**0, i = 0;
-    while(true){
+    while(target > nums[e]){
 	console.log(s,e,i);
         if(target >= nums[s] && target <= nums[e]){
             return binSearch(nums, target, s, e);
@@ -162,6 +162,10 @@ function searchInfiniteArray(nums, target){
         i = i + 1;
         e = s + 2**i;
     }
+    if(target == nums[s]) return s;
+    if(target == nums[e]) return e;
+
+    return -1;
 }
 
 function binSearch(nums, target, s, e){
