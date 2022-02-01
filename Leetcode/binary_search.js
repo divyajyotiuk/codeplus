@@ -144,3 +144,42 @@ function twoPointerSearch(nums, target){
     
     return a;
 }
+
+/*
+* Position of an Element in Infinite Sorted Array. The target element should be present.
+*/
+
+function populateArr(arr){ for(let i=0; i<1000;i++){ arr.push(3*i+1); } return arr; }
+
+function searchInfiniteArray(nums, target){
+    let s = 0; e = 2**0, i = 0;
+    while(true){
+	console.log(s,e,i);
+        if(target >= nums[s] && target <= nums[e]){
+            return binSearch(nums, target, s, e);
+        }
+        s = e + 1;
+        i = i + 1;
+        e = s + 2**i;
+    }
+}
+
+function binSearch(nums, target, s, e){
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+        if(target < nums[m]){
+            e = m - 1;
+        }else if(target > nums[m]){
+            s = m + 1;
+        }else {
+            return m;
+        }
+    }
+    return -1;
+}
+let nums = populateArr([]); // array generator
+let ind = searchInfiniteArray(nums, 208); // returns 69
+nums[69]; // on verifying returns 208 
+
+
+
