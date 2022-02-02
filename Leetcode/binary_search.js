@@ -184,3 +184,59 @@ nums[69]; // on verifying returns 208
 
 
 
+/**
+ * https://leetcode.com/problems/peak-index-in-a-mountain-array/
+ *
+ * @param {number[]} arr
+ * @return {number}
+ */
+var peakIndexInMountainArray = function(arr) { // this seems to be faster
+    let s = 0, n = arr.length, e = n - 1;
+    
+    let m = Math.floor((s+e)/2);
+    
+    while(s<=e){
+        if(arr[m] > arr[m-1] && arr[m] > arr[m+1]){
+            return m;
+        }else if(arr[m] < arr[m+1]){
+            s = m + 1;
+        }else if(arr[m] > arr[m+1]){
+            e = m - 1 ;
+        }
+        m = Math.floor((s+e)/2);
+    }
+    return -1;
+};
+
+
+// with minimum checks
+function peakInMountainArray(arr){
+    let s = 0, n = arr.length, e = n - 1;
+    
+    while(s<e){ // when both are equal - we have found the max element
+         let m = Math.floor((s+e)/2);
+         if(arr[m] > arr[m+1]){ // we are in descending part of array
+            e = m; // because this could be the element
+         }else{
+            s = m + 1;
+         }
+    }
+    return s;
+};
+
+
+// brute force
+function mountainArray(arr){
+    let a = -1;
+    let ind = 0;
+    for(let i=0; i<arr.length ; i++){
+        if(a < arr[i]){
+            a = arr[i];
+        }else{
+            ind = i-1;
+            break;
+        }
+    }
+    return ind;
+}
+
