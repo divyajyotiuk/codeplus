@@ -240,3 +240,79 @@ function mountainArray(arr){
     return ind;
 }
 
+/**
+ *
+ * https://leetcode.com/problems/find-in-mountain-array/ 
+ *
+ * // This is the MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * function MountainArray() {
+ *     @param {number} index
+ *     @return {number}
+ *     this.get = function(index) {
+ *         ...
+ *     };
+ *
+ *     @return {number}
+ *     this.length = function() {
+ *         ...
+ *     };
+ * };
+ *
+ * @param {number} target
+ * @param {MountainArray} mountainArr
+ * @return {number}
+ */
+var findInMountainArray = function(target, mountainArr) {
+    let s=0,n=mountainArr.length(),e=n-1;
+    
+    let peakIndex = peakInMountainArray(mountainArr);
+    
+    let ind1 =  binSearch( mountainArr, target, s, peakIndex, true );
+    
+    if(ind1 != -1) return ind1;
+    
+    let ind2 =  binSearch( mountainArr, target, peakIndex, e );
+    
+    return ind2;
+};
+
+function peakInMountainArray(arr){     // with minimum checks wins here
+    let s = 0, n = arr.length(), e = n - 1;
+    
+    while(s<e){ // when both are equal - we have found the max element
+         let m = Math.floor((s+e)/2);
+         if(arr.get(m) > arr.get(m+1) ){ // we are in descending part of array
+            e = m; // because this could be the element
+         }else{
+            s = m + 1;
+         }
+    }
+    return s;
+};
+
+function binSearch(mountainArr, target, s, e, isAsc){
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+
+        if(target == mountainArr.get(m)){
+            return m;
+        }else{
+            if(isAsc){
+                if(target < mountainArr.get(m)){
+                    e = m - 1;
+                }else{
+                    s = m + 1;
+                }
+            }else{
+                if(target < mountainArr.get(m)){
+                    s = m + 1;
+                }else{
+                    e = m - 1;
+                }
+            }
+        }
+    }
+    return -1;
+}
+
