@@ -316,3 +316,66 @@ function binSearch(mountainArr, target, s, e, isAsc){
     return -1;
 }
 
+
+/**
+ *
+ * https://leetcode.com/problems/search-in-rotated-sorted-array/
+ *
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let s=0, n=nums.length, e=n-1;
+    
+    if(nums[s] <= nums[e]){
+        return binSearch(nums, target, s, e);
+    }
+    
+    let pivot = findPivotIndex(nums);
+
+    if(pivot != -1){
+        if(target <= nums[pivot] && target >= nums[s]){
+            return binSearch(nums, target, 0, pivot);
+        }else{
+            return binSearch(nums, target, pivot + 1, e);
+        }
+    }
+    
+    return -1;
+};
+
+function findPivotIndex(nums){
+    let s=0, n=nums.length, e=n-1;
+    
+    while(s<e){
+        let m = Math.floor((s+e)/2);
+        
+        if(nums[m] > nums[m+1]){
+            return m;
+        }else if(nums[s] > nums[m]){
+            e = m;
+        }else{
+            s = m + 1;
+        }
+    }
+    
+    return -1;
+}
+
+function binSearch(nums, target,s,e){
+    
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+        
+        if(nums[m] == target){
+            return m;
+        }else if(nums[m] > target){
+            e = m - 1;
+        }else{
+            s = m + 1;  
+        }
+    }
+    
+    return -1;
+}
