@@ -379,3 +379,10 @@ function binSearch(nums, target,s,e){
     
     return -1;
 }
+
+
+/**
+ * TODO not solved
+ * https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+ *
+ */
