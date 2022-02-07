@@ -413,3 +413,64 @@ function findPivotIndex(arr){
 }
 
 
+/**
+ *
+ * https://leetcode.com/problems/split-array-largest-sum/
+ *
+ * @param {number[]} nums
+ * @param {number} m
+ * @return {number}
+ */
+var splitArray = function(nums, m) {
+    let n=nums.length;
+    
+    let s = findMaxNum(nums);
+    let e = calcSum(nums,0,n-1);
+    
+    if(m == 1) return e;
+    if(m == n) return s;
+    
+    while(s<e){
+        let mid = s + Math.floor((e-s)/2);
+        let sum = 0;
+        let p = 1;
+        for(let no of nums){
+            if((sum + no) > mid){
+                // start new array & increase the partitions
+                sum = no;
+                p = p + 1;
+            }else{
+                sum = sum + no;
+            }
+        }
+        
+        if(p<=m){
+            e = mid;
+        }else{
+            s = mid + 1;
+        }
+        
+    }
+    
+    return s; // start == end
+};
+
+function calcSum(nums, s, e){
+    let sum = 0;
+    for(let i=s; i<=e; i++){
+        sum = sum + nums[i];
+    }
+    
+    return sum;
+}
+
+function findMaxNum(nums){
+    let max = nums[0];
+    for(let i=1; i<nums.length; i++){
+        if(max < nums[i]){
+            max = nums[i];
+        }
+    }
+    
+    return max;
+}
