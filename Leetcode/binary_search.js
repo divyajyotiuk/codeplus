@@ -401,10 +401,10 @@ function findPivotIndex(arr){
     while(s<e){
         let m = s + Math.floor((e-s)/2);
         if(arr[m] > arr[m+1]){
-            return m;
+            return m;  // rotated m times
         }
         if(arr[m] < arr[m-1]){
-            return m;
+            return m;  // rotated m times
         }
         if(arr[m] < arr[e]){
             e = m - 1;
@@ -412,7 +412,7 @@ function findPivotIndex(arr){
             s = m + 1;
         }
     }
-    return -1;
+    return 0; // rotated 0 times
 }
 
 
