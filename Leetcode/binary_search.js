@@ -386,3 +386,33 @@ function binSearch(nums, target,s,e){
  * https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
  *
  */
+
+
+/**
+ * Rotation count
+ * Given: distinct array sorted in ascending order. array rotated clockwise k times. Find k.
+ * arr = [12,16,2,3,7,10]
+ * Output = 2
+ */
+
+// find pivot
+function findPivotIndex(arr){
+    let s=0,n=arr.length,e=n-1;
+    while(s<e){
+        let m = s + Math.floor((e-s)/2);
+        if(arr[m] > arr[m+1]){
+            return m;
+        }
+        if(arr[m] < arr[m-1]){
+            return m;
+        }
+        if(arr[m] < arr[e]){
+            e = m - 1;
+        }else{
+            s = m + 1;
+        }
+    }
+    return -1;
+}
+
+
