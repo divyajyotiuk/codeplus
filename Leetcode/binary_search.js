@@ -474,3 +474,36 @@ function findMaxNum(nums){
     
     return max;
 }
+
+
+// populate 2D array - row wise and column wise sorted
+function populate2DArraySorted(){
+    let arr={};
+    let k=0;
+    for(let i=0;i<6;i++){
+        arr[i] = {};
+        for(let j=0;j<6;j++){
+            arr[i][j] = i*10+j*10+k;
+            k = k+1;
+        }
+    }
+    return arr;
+}
+
+// binary search in 2D array
+// time complexity - O(m+n)
+function search(arr,target){
+    let m = Object.keys(arr).length; // rows
+    let n = Object.keys(arr[0]).length; // cols
+    let row=0, col=n-1;
+    while(row < m && col > 0){
+        if(target == arr[row][col]){
+            return [row,col];
+        }else if(target < arr[row][col]){
+            col = col - 1; // eliminate column
+        }else{
+            row = row + 1; // eliminate row
+        }
+    }
+    return -1;
+}
