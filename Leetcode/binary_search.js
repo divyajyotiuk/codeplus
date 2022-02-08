@@ -476,6 +476,11 @@ function findMaxNum(nums){
 }
 
 
+
+/*
+*  https://divyajyotiuk.hashnode.dev/search-in-matrix
+*/
+
 // populate 2D array - row wise and column wise sorted
 function populate2DArraySorted(){
     let arr={};
@@ -507,3 +512,72 @@ function search(arr,target){
     }
     return -1;
 }
+
+/*
+array is strictly sorted
+
+//0    1     2     3
+  1    2    3   4   //0
+  5   6    7   8   //1
+  9   10    11   12   //2
+
+*/
+
+function populate2DArray(){
+    let arr={};
+    let k=0;
+    for(let i=0;i<6;i++){
+        arr[i]={};
+        for(let j=0;j<5;j++){
+            arr[i][j] = k+1;
+            k=k+1;
+        }
+    }
+    return arr;
+}
+
+function matrixSearch(nums, target){
+    let m = Object.keys(nums).length; // gives #rows
+    let n = Object.keys(nums[0]).length; // gives #columns
+
+    let row = binarySearchCol(nums, target, n-1); // give last column and get row
+    let col = binarySearchRow(nums, target, row); // search element in that row
+
+    if(nums[row][col] == target) return [row, col];
+
+    return [-1, -1];
+}
+
+// returns row which possibly contains the target
+function binarySearchCol(nums, target, col){
+    let s = 0, n = Object.keys(nums[0]).length, e = n - 1;
+    
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+        if(target == nums[m][col]){
+            return m;
+        }else if(target < nums[m][col]){
+            e = m - 1;
+        }else{
+            s = m + 1;
+        }
+    }
+    return s;
+}
+
+function binarySearchRow(nums, target, row){
+    let s = 0, n = Object.keys(nums).length, e = n - 1;
+    
+    while(s<=e){
+        let m = Math.floor((s+e)/2);
+        if(target == nums[row][m]){
+            return m;
+        }else if(target < nums[row][m]){
+            e = m - 1;
+        }else{
+            s = m + 1;
+        }
+    }
+    return s;
+}
+
