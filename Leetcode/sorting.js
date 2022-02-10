@@ -1,6 +1,6 @@
 /*
  * Revise here
- * https://divyajyotiuk.hashnode.dev/sorting
+ * https://divyajyotiuk.hashnode.dev/sorting-part-1
  */
 function bubbleSort(nums){
     let n = nums.length;
@@ -36,3 +36,20 @@ function selectionSort(nums){
     }
     return nums;
 }
+
+function insertionSort(nums){
+    let n = nums.length;
+    for(let i=1;i<n;i++){ // runs n-1 times
+        for(let j=i;j>0;j--){ // moves towards the left-hand side
+            if(nums[j]<nums[j-1]){
+                let temp = nums[j-1];
+                nums[j-1] = nums[j];
+                nums[j] = temp;
+            }else{
+                break; // left-hand side is already sorted 
+            }
+        }
+    }
+    return nums;
+}
+
