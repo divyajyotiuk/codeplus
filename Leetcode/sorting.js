@@ -72,3 +72,32 @@ function cyclicSort(nums){
     }
     return nums;
 }
+
+
+/**
+ *
+ * https://leetcode.com/problems/missing-number/
+ *
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function(nums) {
+    let index = 0;
+    while(index < nums.length){
+        if(nums[index] != nums[nums[index]] && nums[index] != nums.length){ // ignore the index which cannot be positioned
+            let temp = nums[nums[index]]; // swap
+            nums[nums[index]] = nums[index];
+            nums[index] = temp;
+        }else{
+            index=index+1;
+        }
+    }
+    index = 0;
+    while(index < nums.length){
+        if(nums[index] != index){
+            break;
+        }
+        index=index+1;
+    }
+    return index;
+};
