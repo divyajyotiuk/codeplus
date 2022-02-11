@@ -84,7 +84,7 @@ function cyclicSort(nums){
 var missingNumber = function(nums) {
     let index = 0;
     while(index < nums.length){
-        if(nums[index] != nums[nums[index]] && nums[index] != nums.length){ // ignore the index which cannot be positioned
+        if(nums[index] != nums[nums[index]] && nums[index] < nums.length){ // ignore the index which cannot be positioned
             let temp = nums[nums[index]]; // swap
             nums[nums[index]] = nums[index];
             nums[index] = temp;
