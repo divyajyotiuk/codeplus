@@ -84,9 +84,11 @@ function cyclicSort(nums){
 var missingNumber = function(nums) {
     let index = 0;
     while(index < nums.length){
-        if(nums[index] != nums[nums[index]] && nums[index] < nums.length){ // ignore the index which cannot be positioned
-            let temp = nums[nums[index]]; // swap
-            nums[nums[index]] = nums[index];
+        let pos = nums[index];
+        if(nums[index] != nums[pos] && nums[index] != nums.length){
+            // place nums[index] in its correct position
+            let temp = nums[pos]; // swap
+            nums[pos] = nums[index];
             nums[index] = temp;
         }else{
             index=index+1;
@@ -100,4 +102,35 @@ var missingNumber = function(nums) {
         index=index+1;
     }
     return index;
+};
+
+
+/**
+ *
+ * https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
+ *
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+function findDisappearedNumbers(nums) {
+    let index = 0;
+    while(index < nums.length){
+        let pos = nums[index] - 1;
+        if(nums[index] != nums[pos]){
+            let temp = nums[pos]; // swap
+            nums[pos] = nums[index];
+            nums[index] = temp;
+        }else{
+            index = index + 1;
+        }
+    }
+    index = 0;
+    let ans = [];
+    while(index < nums.length){
+        if(nums[index] != index+1){
+            ans.push(index+1);
+        }
+        index=index+1;
+    }
+    return ans;
 };
