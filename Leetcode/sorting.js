@@ -134,3 +134,33 @@ function findDisappearedNumbers(nums) {
     }
     return ans;
 };
+
+/**
+ *
+ * https://leetcode.com/problems/find-the-duplicate-number/
+ *
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    let index=0;
+    while(index < nums.length){
+        let pos = nums[index] - 1;
+        if(nums[index] != nums[pos]){
+            let temp = nums[pos];
+            nums[pos] = nums[index];
+            nums[index] = temp;
+        }else{
+            index = index + 1;
+        }
+    }
+    index = 0;
+    while(index < nums.length){
+        if(nums[index] != index+1){
+            break;
+        }
+        index = index + 1;
+    }
+
+    return nums[index];
+};
