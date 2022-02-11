@@ -53,3 +53,22 @@ function insertionSort(nums){
     return nums;
 }
 
+/*
+ * Revise here
+ * https://divyajyotiuk.hashnode.dev/cyclic-sort
+ */
+function cyclicSort(nums){
+    let index = 0;
+    while(index < nums.length){
+        let pos = nums[index]-1; // pos is the correct position of nums[index]
+        if(nums[index] != nums[pos]){
+            // place nums[index] in its correct position
+            let temp = nums[pos]; // swap
+            nums[pos] = nums[index];
+            nums[index] = temp;
+        }else{
+            index=index+1;
+        }
+    }
+    return nums;
+}
