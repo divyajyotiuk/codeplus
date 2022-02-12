@@ -164,3 +164,34 @@ var findDuplicate = function(nums) {
 
     return nums[index];
 };
+
+
+/**
+ *
+ * https://leetcode.com/problems/find-all-duplicates-in-an-array/
+ *
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+    let index=0;
+    let ans=[];
+    while(index < nums.length){
+        let pos = nums[index]-1;
+        if(nums[index]!=nums[pos]){ // if they are not duplicates
+            let temp = nums[index];
+            nums[index] = nums[pos];
+            nums[pos] = temp;
+        }else{
+            index = index+1;
+        }
+    }
+    index=0;
+    while(index < nums.length){
+        if(nums[index] != index+1){
+            ans.push(nums[index]);
+        }
+        index = index+1;
+    }
+    return ans;
+};
