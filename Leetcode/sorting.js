@@ -195,3 +195,33 @@ var findDuplicates = function(nums) {
     }
     return ans;
 };
+
+
+/**
+ *
+ * https://leetcode.com/problems/set-mismatch/
+ *
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findErrorNums = function(nums) {
+    let index=0;
+    while(index < nums.length){
+        let pos = nums[index] - 1;
+        if(nums[index]!=nums[pos]){
+            let temp = nums[pos];
+            nums[pos] = nums[index];
+            nums[index] = temp;
+        }else{
+            index = index + 1;
+        }
+    }
+    index=0;
+    while(index < nums.length){
+        if(nums[index]!=index+1){
+            break;
+        }
+        index=index+1;
+    }
+    return [nums[index], index+1];
+};
