@@ -225,3 +225,33 @@ var findErrorNums = function(nums) {
     }
     return [nums[index], index+1];
 };
+
+/**
+ * LC Hard
+ * https://leetcode.com/problems/first-missing-positive/
+ *
+ * @param {number[]} nums
+ * @return {number}
+ */
+var firstMissingPositive = function(nums) {
+    let index=0;
+    while(index < nums.length){
+        let pos = nums[index]-1;
+        // ignore -ve and numbers greater than nums.length
+        if(nums[index] > 0 && nums[index] <= nums.length && nums[index]!=nums[pos] ){
+            let temp = nums[pos];
+            nums[pos] = nums[index];
+            nums[index] = temp;
+        }else{
+            index = index+1;
+        }
+    }
+    index=0;
+    while(index < nums.length){
+        if(nums[index] != index+1){
+            break;
+        }
+        index = index + 1;
+    }
+    return index+1;
+};
