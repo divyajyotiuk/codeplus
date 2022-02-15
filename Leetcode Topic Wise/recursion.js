@@ -96,3 +96,36 @@ function factorial(n){
 
 // a = prodOfDigits(12345);
 // console.log(a);
+
+/**
+ * Method 1: reverse a number
+ * works for number ending with 0s - gives exact string
+ */
+ function reverse1(n){
+    console.log("reverse(",n,")");
+    if(n == 0){
+        return '';
+    }
+
+    return n%10 + reverse1( parseInt(n/10) );
+}
+
+// a = reverse1(345601000);
+// console.log(a);
+
+/**
+ * Method 2: reverse a number
+ * 0s in the end are ignored
+ */
+ function reverse2(n){
+    console.log("reverse(",n,")");
+    let digits = parseInt( Math.log10(n))+1; // ** for calculating number of digits
+    if(n%10 == n){ // if only 1 digit remaining
+        return n;
+    }
+
+    return (n%10)*Math.pow(10,digits-1) + reverse2( parseInt(n/10) );
+}
+
+// a = reverse2(3456010);
+// console.log(a);
