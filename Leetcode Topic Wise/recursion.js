@@ -143,4 +143,28 @@ function isPalindrome(n){
 // b = isPalindrome(12345);
 // console.log(a,b);
 
+function reverseString(str){
+    console.log("reverse(",str,")");
+    if(str.length == 1){ // if only 1 char remaining
+        return str; // return char
+    }
+                            //*imp* substring
+    return reverseString(str.substring(1)) + str[0];
+}
+
+// let a = reverseString('abcd',0);
+// console.log(a);
+
+/**
+ * palindrome string
+ * returns {boolean}
+ */
+
+function isPalindrome(str){
+    return str == reverseString(str);
+}
+
+// a = isPalindrome('abcba');
+// b = isPalindrome('abcda');
+// console.log(a,b);
 
