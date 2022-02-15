@@ -129,3 +129,18 @@ function factorial(n){
 
 // a = reverse2(3456010);
 // console.log(a);
+
+/**
+ * palindrome number
+ * returns {boolean}
+ */
+
+function isPalindrome(n){
+    return n == reverse2(n);
+}
+
+// a = isPalindrome(12321);
+// b = isPalindrome(12345);
+// console.log(a,b);
+
+
