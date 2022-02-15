@@ -190,3 +190,23 @@ function countZeros(n,c){
 // a = countZeros(102030000400,0);
 // console.log(a);
 
+/**
+ * LC easy
+ * https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/
+ *
+ * @param {number} num
+ * @return {number}
+ */
+var numberOfSteps = function(num) {
+    if(num == 0) return 0;
+    
+    if(num%2 == 0){
+        num = parseInt(num/2);
+    }else{
+        num = num - 1;
+    }
+    
+    return 1 + numberOfSteps(num);
+};
+
+
