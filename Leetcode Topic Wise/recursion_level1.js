@@ -168,3 +168,25 @@ function isPalindrome(str){
 // b = isPalindrome('abcda');
 // console.log(a,b);
 
+/**
+ * count zeros in the number
+ * @param {Number} n 
+ * @returns {Number}
+ */
+function countZeros(n,c){
+    console.log("countZeros(",n,")");
+    
+    if(n%10 == n){
+        return c;
+    }
+
+    if((n%10) == 0){
+        c = c + 1;
+    }
+
+    return countZeros(parseInt(n/10),c);
+}
+
+// a = countZeros(102030000400,0);
+// console.log(a);
+
