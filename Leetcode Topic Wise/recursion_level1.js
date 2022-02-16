@@ -229,7 +229,7 @@ function isSortedArray(arr,i=0){
  * linear search using recursion
  */
 function linearSearch(arr,target,i=0){
-    console.log("linearSearch(",arr[i],arr[i+1],")");
+    console.log("linearSearch(",arr[i],")");
     
     if(arr[i] == target){
         return i;
@@ -243,4 +243,25 @@ function linearSearch(arr,target,i=0){
 }
 
 // a = linearSearch([1,2,3,6,8],8);
+// console.log(a);
+
+/**
+ * linear search using recursion
+ * array with duplicates
+ */
+function findAllIndices(arr,target,i=0,ans=[]){
+    console.log("findAllIndices(",ans,")");
+    
+    if(arr[i] == target){
+        ans.push(i);
+    }
+
+    if(arr.length == 0 || i == arr.length - 1){
+        return ans;
+    }
+
+    return findAllIndices(arr,target,i+1,ans);
+}
+
+// a = findAllIndices([1,3,4,3,2,6,7,8],3,0);
 // console.log(a);
