@@ -224,3 +224,23 @@ function isSortedArray(arr,i=0){
 
 // a = isSortedArray([1,2,3,6,8]);
 // console.log(a);
+
+/**
+ * linear search using recursion
+ */
+function linearSearch(arr,target,i=0){
+    console.log("linearSearch(",arr[i],arr[i+1],")");
+    
+    if(arr[i] == target){
+        return true;
+    }
+
+    if(arr.length == 0 || i == arr.length - 1){
+        return false;
+    }
+
+    return linearSearch(arr,target,i+1);
+}
+
+// a = linearSearch([1,2,3,6,8],8);
+// console.log(a);
