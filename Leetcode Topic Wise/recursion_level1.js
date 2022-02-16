@@ -232,11 +232,11 @@ function linearSearch(arr,target,i=0){
     console.log("linearSearch(",arr[i],arr[i+1],")");
     
     if(arr[i] == target){
-        return true;
+        return i;
     }
 
     if(arr.length == 0 || i == arr.length - 1){
-        return false;
+        return -1;
     }
 
     return linearSearch(arr,target,i+1);
