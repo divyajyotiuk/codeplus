@@ -209,4 +209,18 @@ var numberOfSteps = function(num) {
     return 1 + numberOfSteps(num);
 };
 
+/**
+ * check if array is sorted
+ */
+function isSortedArray(arr,i=0){
+    console.log("isSortedArray(",arr[i],arr[i+1],")");
+    
+    if(i == arr.length-1){
+        return true;
+    }
 
+    return (arr[i] < arr[i+1]) && isSortedArray(arr,i+1);
+}
+
+// a = isSortedArray([1,2,3,6,8]);
+// console.log(a);
