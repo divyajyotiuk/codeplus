@@ -265,3 +265,53 @@ function findAllIndices(arr,target,i=0,ans=[]){
 
 // a = findAllIndices([1,3,4,3,2,6,7,8],3,0);
 // console.log(a);
+
+/*
+ * search in rotated binary search
+ */
+function search(a,target,s,e){
+
+    let m = s + parseInt( (e-s)/2 );
+
+    console.log("search(",s,e,m,")");
+
+    if(a[m] == target) return m;
+    if(a[s] == target) return s;
+    if(a[e] == target) return e;
+
+    if(a[m] < a[m+1]){  // either left or right side of pivot
+        if(a[s] < a[m] && a[e] < a[m]){ // completely left side of pivot
+            if(target > a[s] && target < a[m]){ // target lies in the left
+                return search(a,target,s,m-1);
+            }else{ // target not on the left side
+                return search(a,target,m+1,e); // move to the right
+            }
+        }else if(a[e] > a[m] && a[s] > a[m]){ // completely right side of pivot
+            if(target > a[m] && target < a[e]){ // target lies in the right
+                return search(a,target,m+1,e);
+            }else{ // target not on the right side
+                return search(a,target,s,m-1); // move to the left
+            }
+        }else if(a[m] > a[s] && a[m] < a[e]){
+            if(target > a[s] && target < a[m]){ // target lies in the left
+                return search(a,target,s,m-1);
+            }else{ // target not on the left side
+                return search(a,target,m+1,e); // move to the right
+            }
+        }
+    }else if(a[m] > a[m+1]){ // at the pivot
+        if(target > a[s] && target < a[m]){ // target lies in the left
+            return search(a,target,s,m-1);
+        }else{
+            return search(a,target,m+1,e); // target lies in the right
+        }
+    }
+
+    return -1;
+
+}
+
+
+// a = search([5,6,7,8,9,1,2,3],6,0,7);
+// a = search([6,7,8,9,1,2,3,4,5],1,0,8);
+// console.log(a , " position");
