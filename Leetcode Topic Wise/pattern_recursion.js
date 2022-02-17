@@ -10,17 +10,16 @@ Pattern -
 
 function patternTriangle(r,c=0){
 
-    console.log("patternTriangle(",r,c,")");
+    console.log("patternTriangle(",r-1,c,")");
 
-    if( (r-1) == 0) return "*";
+    if((r-1) == 0) return "*";
 
-    if(c < r-1){
+    if(c < (r-1) ){
         return "* " + patternTriangle(r,c+1);
     }else{
         return  "*" + "\r\n" + patternTriangle(r-1,0);
     }
 }
 
-a = patternTriangle(4);
-console.log(a);
-
+// a = patternTriangle(4);
+// console.log(a);
