@@ -8,18 +8,17 @@ Pattern -
 --------------
 */
 
-function patternTriangle(n){
+function patternTriangle(r,c=0){
 
-    console.log("patternTriangle(",n,")");
+    console.log("patternTriangle(",r,c,")");
 
-    if(n==0) return "";
+    if( (r-1) == 0) return "*";
 
-    let print = "";
-    for(let i=0; i<n;i++){
-        print = print.concat("* ");
+    if(c < r-1){
+        return "* " + patternTriangle(r,c+1);
+    }else{
+        return  "*" + "\r\n" + patternTriangle(r-1,0);
     }
-
-    return print + "\r\n" + patternTriangle(n-1);
 }
 
 a = patternTriangle(4);
