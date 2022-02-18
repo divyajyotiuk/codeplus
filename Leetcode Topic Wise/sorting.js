@@ -73,6 +73,56 @@ function cyclicSort(nums){
     return nums;
 }
 
+/*
+ * Revise here
+ * https://divyajyotiuk.hashnode.dev/
+ */
+function mergeSort(a){
+    if(a.length == 1){
+        return a;
+    }
+
+    let m = parseInt(a.length/2);
+
+    // Array.prototype.slice provides shallow copy of array. 
+    // specify start and end and end is exclusive
+    let first = mergeSort(a.slice(0,m));
+    let second =  mergeSort(a.slice(m,a.length));
+
+    return merge(first, second);
+}
+
+function merge(first=[], second=[]){
+    let mergedArr = [];
+
+    let i=0,j=0;
+
+    while(i<first.length && j<second.length){
+        if(first[i] < second[j]){
+            mergedArr.push(first[i]);
+            i=i+1;
+        }else{
+            mergedArr.push(second[j]);
+            j=j+1;
+        }
+    }
+
+    while(i<first.length){
+        mergedArr.push(first[i]);
+        i=i+1;
+    }
+
+    while(j<second.length){
+        mergedArr.push(second[j]);
+        j=j+1;
+    }
+
+    return mergedArr;
+}
+
+// a = mergeSort([8,4,9,2,3,12,10]);
+// console.log(a);
+
 
 /**
  *
