@@ -75,7 +75,7 @@ function cyclicSort(nums){
 
 /*
  * Revise here
- * https://divyajyotiuk.hashnode.dev/
+ * https://divyajyotiuk.hashnode.dev/sorting-part-2
  */
 function mergeSort(a){
     if(a.length == 1){
@@ -122,6 +122,60 @@ function merge(first=[], second=[]){
 
 // a = mergeSort([8,4,9,2,3,12,10]);
 // console.log(a);
+
+
+//let arr = [8,4,9,2,3,12,10];
+/*
+ * Revise here
+ * https://divyajyotiuk.hashnode.dev/sorting-part-2
+ * Merge Sort in-place
+ */
+function mergeSortInPlace(a,s,e){
+    console.log("mergeSort(",a,s,e,")");
+
+    if(e-s == 1){
+        return;
+    }
+
+    let m = s + parseInt((e-s)/2);
+
+    mergeSortInPlace(a,s,m);
+    mergeSortInPlace(a,m,e);
+
+    // i -> start of first array
+    // j -> start of second array
+    let i=s,j=m;
+
+    let mergedArr = [];
+    while(i<m && j<e){
+        if(arr[i] < arr[j]){
+            mergedArr.push(arr[i]);
+            i=i+1;
+        }else{
+            mergedArr.push(arr[j]);
+            j=j+1;
+        }
+    }
+
+    while(i<m){
+        mergedArr.push(arr[i]);
+        i=i+1;
+    }
+
+    while(j<e){
+        mergedArr.push(arr[j]);
+        j=j+1;
+    }
+
+    // 
+    for(let k=0;k<mergedArr.length;k++){
+        arr[s+k] = mergedArr[k];
+    }
+}
+
+// let n = arr.length;
+// mergeSortInPlace(arr,0,n);
+// console.log(arr);
 
 
 /**
