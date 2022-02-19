@@ -178,6 +178,54 @@ function mergeSortInPlace(a,s,e){
 // console.log(arr);
 
 
+//let arr = [8,4,9,2,3,12,10];
+/*
+ * Revise here
+ * https://divyajyotiuk.hashnode.dev/sorting-part-2
+ * Quick sort
+ */
+function quickSort(a,low,high){
+
+    if(low >= high){
+        return;
+    }
+
+    let m = low + parseInt((high - low)/2);
+    let pivot = a[m];
+
+    let s = low, e = high; // low,high are start and end of array resp
+                            // s & e are pointers 
+
+    while(s <= e){
+
+        while(a[s] < pivot){
+            s=s+1;
+        }
+
+        while(a[e] > pivot){
+            e=e-1;
+        }
+
+        // else condition where a[s] > pivot && a[e] < pivot
+        // swap
+        if(s<=e){
+            let temp = a[s];
+            a[s] = a[e];
+            a[e] = temp;
+
+            s=s+1;
+            e=e-1;
+        }
+    }
+
+    quickSort(a,low,e);
+    quickSort(a,s,high);
+}
+
+// let n = arr.length;
+// quickSort(arr,0,n-1);
+
+
 /**
  *
  * https://leetcode.com/problems/missing-number/
