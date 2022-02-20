@@ -336,5 +336,28 @@ function skipACharacter(str,char){
 // a = skipACharacter("baccad","a");
 // console.log(a);
 
+/*
+ * Skip a string
+ */
+function skipAString(mainStr,str){
+    console.log("skipAString(",mainStr,")");
 
+    let strLen = str.length;
+
+    // main string less than actual string
+    // obvio not equal, just append as is
+    if(mainStr.length < strLen){
+        return mainStr;
+    }
+
+    if(str == mainStr.substring(0,strLen)){ // substring excludes end
+        return skipAString(mainStr.substring(strLen),str);
+    }else{
+        return mainStr[0] + skipAString(mainStr.substring(1),str);
+    }
+
+}
+
+a = skipAString("baccadba","ba");
+console.log(a);
 
