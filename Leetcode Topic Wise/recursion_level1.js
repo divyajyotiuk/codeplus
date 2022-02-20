@@ -315,3 +315,28 @@ function search(a,target,s,e){
 // a = search([5,6,7,8,9,1,2,3],6,0,7);
 // a = search([6,7,8,9,1,2,3,4,5],1,0,8);
 // console.log(a , " position");
+
+
+/*
+ * Skip a character
+ */
+function skipACharacter(str,char){
+    console.log("skipACharacter(",str,")");
+    if(str.length == 1){
+        if(str != char){
+            return str;
+        }
+        return "";
+    }
+
+    if(str[0]!=char){
+        return str[0] + skipACharacter(str.substring(1),char);
+    }else{
+        return skipACharacter(str.substring(1),char);
+    }
+}
+
+// a = skipACharacter("baccad","a");
+// console.log(a);
+
+
