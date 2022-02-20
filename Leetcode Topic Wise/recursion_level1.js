@@ -322,10 +322,7 @@ function search(a,target,s,e){
  */
 function skipACharacter(str,char){
     console.log("skipACharacter(",str,")");
-    if(str.length == 1){
-        if(str != char){
-            return str;
-        }
+    if(str.length == 0){ // string is processed
         return "";
     }
 
@@ -338,5 +335,6 @@ function skipACharacter(str,char){
 
 // a = skipACharacter("baccad","a");
 // console.log(a);
+
 
 
