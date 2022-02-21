@@ -358,6 +358,37 @@ function skipAString(mainStr,str){
 
 }
 
-a = skipAString("baccadba","ba");
-console.log(a);
+// a = skipAString("baccadba","ba");
+// console.log(a);
+
+/**
+ * skip string app and not apple
+ */
+function skipAppNotApple(mainStr,str,excludeStr){
+    console.log("skipAString(",mainStr,")");
+
+    let strLen = str.length;
+    let excludeStrLen = excludeStr.length;
+
+    // main string less than actual string
+    // obvio not equal, just append as is
+    if(mainStr.length < strLen){
+        return mainStr;
+    }
+
+    if(str == mainStr.substring(0,strLen)){ // substring excludes end
+        if(excludeStr == mainStr.substring(0,excludeStrLen)){
+            return mainStr[0] + skipAppNotApple(mainStr.substring(1),str,excludeStr);
+        }
+        return skipAppNotApple(mainStr.substring(strLen),str,excludeStr);
+    }else{
+        return mainStr[0] + skipAppNotApple(mainStr.substring(1),str,excludeStr);
+    }
+
+}
+
+// a = skipAppNotApple("appleapcachaapp","app","apple");
+// console.log(a);
+// b = skipAppNotApple("appkacha","app","apple");
+// console.log(b);
 
