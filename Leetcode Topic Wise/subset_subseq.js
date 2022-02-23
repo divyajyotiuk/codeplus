@@ -75,7 +75,13 @@ function iterativeSubset(unprocessedArr=[]){
 ans = iterativeSubset([1,2,3]);
 console.log(ans); // [[],[1], [2], [3], [1,2], [2,3], [1,3], [1,2,3]]
 
-
+/*
+ * When you find a duplicate element, then only copy the
+ * newly created subsets of the previous step
+ * 
+ * sort the array for this to work & supports only if same number present twice
+ * not possible inputs - [1,2,2,2] or [1,2,3,2]
+ */
 function iterativeSubsetWithDuplicates(unprocessedArr=[]){
     let processedArr = [];
 
@@ -87,7 +93,7 @@ function iterativeSubsetWithDuplicates(unprocessedArr=[]){
     for(let i=0;i<unprocessedArr.length;i++){
         let copyOfProcessed = [];
 
-        if(i>0 && unprocessedArr[i] == unprocessedArr[i-1]){ // sort the array for this to work
+        if(i>0 && unprocessedArr[i] == unprocessedArr[i-1]){
              // don't copy the whole array 
             copyOfProcessed = [...processedArr.slice(parseInt(processedArr.length/2))];
         }else{
