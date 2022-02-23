@@ -72,15 +72,15 @@ function iterativeSubset(unprocessedArr=[]){
     return processedArr;
 }
 
-ans = iterativeSubset([1,2,3]);
-console.log(ans); // [[],[1], [2], [3], [1,2], [2,3], [1,3], [1,2,3]]
+// ans = iterativeSubset([1,2,3]);
+// console.log(ans); // [[],[1], [2], [3], [1,2], [2,3], [1,3], [1,2,3]]
 
 /*
  * When you find a duplicate element, then only copy the
  * newly created subsets of the previous step
  * 
- * sort the array for this to work & supports only if same number present twice
- * not possible inputs - [1,2,2,2] or [1,2,3,2]
+ * sort the array for this to work
+ * not possible inputs - [1,2,3,2]
  */
 function iterativeSubsetWithDuplicates(unprocessedArr=[]){
     let processedArr = [];
@@ -90,16 +90,18 @@ function iterativeSubsetWithDuplicates(unprocessedArr=[]){
         processedArr.push([]) // push empty
     }
 
+    let start = 0, end = 0;
     for(let i=0;i<unprocessedArr.length;i++){
         let copyOfProcessed = [];
 
-        if(i>0 && unprocessedArr[i] == unprocessedArr[i-1]){
-             // don't copy the whole array 
-            copyOfProcessed = [...processedArr.slice(parseInt(processedArr.length/2))];
+        if(i>0 && unprocessedArr[i] == unprocessedArr[i-1]){ // sort the array for this to work
+            // don't copy the whole array 
+            start = end + 1;
+            copyOfProcessed = [...processedArr.slice(start)];
         }else{
             copyOfProcessed = [...processedArr];
         }
-        
+        end = processedArr.length - 1;
         for(let j=0;j<copyOfProcessed.length;j++){
             copyOfProcessed[j] = copyOfProcessed[j].concat([unprocessedArr[i]]);
         }
@@ -109,7 +111,7 @@ function iterativeSubsetWithDuplicates(unprocessedArr=[]){
     return processedArr;
 }
 
-ans = iterativeSubsetWithDuplicates([1,2,2]);
-console.log(ans); //[ [], [ 1 ], [ 2 ], [ 1, 2 ], [ 2, 2 ], [ 1, 2, 2 ] ]
+// ans = iterativeSubsetWithDuplicates([1,2,2]);
+// console.log(ans); //[ [], [ 1 ], [ 2 ], [ 1, 2 ], [ 2, 2 ], [ 1, 2, 2 ] ]
 
 
