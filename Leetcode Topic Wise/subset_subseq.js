@@ -52,3 +52,58 @@ function subsequenceWithAscii(processedStr, unprocessedStr, arr=[]){
 // ans = subsequenceWithAscii("","abc");
 // console.log(ans);
 
+
+function iterativeSubset(unprocessedArr=[]){
+    let processedArr = [];
+
+    // start with empty array
+    if(unprocessedArr.length > 0){
+        processedArr.push([]) // push empty array
+    }
+
+    for(let i=0;i<unprocessedArr.length;i++){ // for every pass #subsets gets doubled
+        let copyOfProcessed = [...processedArr];
+        for(let j=0;j<copyOfProcessed.length;j++){
+            copyOfProcessed[j] = copyOfProcessed[j].concat([unprocessedArr[i]]);
+        }
+        processedArr = processedArr.concat(copyOfProcessed);
+    }
+
+    return processedArr;
+}
+
+ans = iterativeSubset([1,2,3]);
+console.log(ans); // [[],[1], [2], [3], [1,2], [2,3], [1,3], [1,2,3]]
+
+
+function iterativeSubsetWithDuplicates(unprocessedArr=[]){
+    let processedArr = [];
+
+    // process 1st element
+    if(unprocessedArr.length > 0){
+        processedArr.push([]) // push empty
+    }
+
+    for(let i=0;i<unprocessedArr.length;i++){
+        let copyOfProcessed = [];
+
+        if(i>0 && unprocessedArr[i] == unprocessedArr[i-1]){ // sort the array for this to work
+             // don't copy the whole array 
+            copyOfProcessed = [...processedArr.slice(parseInt(processedArr.length/2))];
+        }else{
+            copyOfProcessed = [...processedArr];
+        }
+        
+        for(let j=0;j<copyOfProcessed.length;j++){
+            copyOfProcessed[j] = copyOfProcessed[j].concat([unprocessedArr[i]]);
+        }
+        processedArr = processedArr.concat(copyOfProcessed);
+    }
+
+    return processedArr;
+}
+
+ans = iterativeSubsetWithDuplicates([1,2,2]);
+console.log(ans); //[ [], [ 1 ], [ 2 ], [ 1, 2 ], [ 2, 2 ], [ 1, 2, 2 ] ]
+
+
