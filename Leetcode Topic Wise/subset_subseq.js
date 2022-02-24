@@ -115,3 +115,25 @@ function iterativeSubsetWithDuplicates(unprocessedArr=[]){
 // console.log(ans); //[ [], [ 1 ], [ 2 ], [ 1, 2 ], [ 2, 2 ], [ 1, 2, 2 ] ]
 
 
+/*
+ * Permutations - recursive
+ */
+let arr = [];
+function permutations(processedStr='',unprocessedStr=''){
+    console.log("permutations : ",processedStr,",",unprocessedStr);
+    if(unprocessedStr.length == 0){
+        arr.push(processedStr);
+        return;
+    }
+
+    // recursion calls increase with increase in processed string
+    for(let i=0;i<=processedStr.length;i++){ 
+        // note this
+        let newString = processedStr.slice(0,i) + unprocessedStr[0] + processedStr.slice(i,processedStr.length);
+        permutations(newString, unprocessedStr.substring(1));
+    }
+
+}
+
+// permutations("","abc");
+// console.log(arr);
