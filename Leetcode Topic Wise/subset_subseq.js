@@ -116,7 +116,8 @@ function iterativeSubsetWithDuplicates(unprocessedArr=[]){
 
 
 /*
- * Permutations - recursive
+ * Permutations - recursive variation 1
+ * update outside Array
  */
 let arr = [];
 function permutations(processedStr='',unprocessedStr=''){
@@ -137,3 +138,29 @@ function permutations(processedStr='',unprocessedStr=''){
 
 // permutations("","abc");
 // console.log(arr);
+
+
+/*
+ * Permutations - recursive variation 2
+ * return array from function itself
+ */
+function permutations(processedStr='',unprocessedStr=''){
+    console.log("permutations : ",processedStr,",",unprocessedStr);
+    if(unprocessedStr.length == 0){
+        let arr = [];
+        arr.push(processedStr);
+        return arr;
+    }
+
+    let a = [];
+    // recursion calls increase with increase in processed string
+    for(let i=0;i<=processedStr.length;i++){ 
+        let newString = processedStr.slice(0,i) + unprocessedStr[0] + processedStr.slice(i,processedStr.length);
+        a = a.concat( permutations(newString, unprocessedStr.substring(1)) );
+    }
+
+    return a;
+}
+
+// let ans = permutations("","abc");
+// console.log(ans);
