@@ -164,3 +164,26 @@ function permutations(processedStr='',unprocessedStr=''){
 
 // let ans = permutations("","abc");
 // console.log(ans);
+
+
+/**
+ * permutation count of the string without taking a factorial of length of string
+ */
+function permutationsCount(processedStr='',unprocessedStr=''){
+    console.log("permutationsCount : ",processedStr,",",unprocessedStr);
+    if(unprocessedStr.length == 0){
+        return 1; // for adding all the 1s
+    }
+
+    let count = 0;
+    // recursion calls increase with increase in processed string
+    for(let i=0;i<=processedStr.length;i++){ 
+        let newString = processedStr.slice(0,i) + unprocessedStr[0] + processedStr.slice(i,processedStr.length);
+        count = count + permutationsCount(newString, unprocessedStr.substring(1));
+    }
+
+    return count;
+}
+
+// let ans = permutationsCount("","abc");
+// console.log(ans);
