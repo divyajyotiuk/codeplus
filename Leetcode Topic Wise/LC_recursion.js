@@ -43,3 +43,29 @@ var recursiveCombo = function(up,arr=[]){
     }
     
 }
+
+
+/**
+ * Amazon - Get the possible number of combinations of number on dice that add up to the target
+ * @param {String} p 
+ * @param {Number} target 
+ * @returns {Array}
+ */
+function diceRollsForTargetSum(p,target){
+    console.log("diceRollsForTargetSum(",p,",",target,")");
+    if(target == 0){
+        let a = []
+        a.push(p);
+        return a;
+    }
+
+    let arr = [];
+    for(let i=1;i<=6 && i<=target;i++){
+        arr = arr.concat(diceRollsForTargetSum(p+i,target - i));
+    }
+
+    return arr;
+}
+
+// let ans = diceRollsForTargetSum("",4);
+// console.log(ans);
