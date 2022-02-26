@@ -10,6 +10,9 @@ var letterCombinations = function(digits) {
     return ans;
 };
 
+// try not to use map the next time and
+// calculate these values using some pattern
+// hint: use ascii probably
 var mapping = {
     "2":["a","b","c"],
     "3":["d","e","f"],
