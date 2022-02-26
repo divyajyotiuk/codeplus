@@ -72,3 +72,35 @@ function diceRollsForTargetSum(p,target){
 
 // let ans = diceRollsForTargetSum("",4);
 // console.log(ans);
+
+
+// print all possible paths from start to end in matrix
+function matrixMaze(start, end, path=''){
+    console.log("matrixMaze(",start,",",path,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        let a = [];
+        a.push(path);
+        return a;
+    }
+
+    let arr = [];
+    if(cy1 < cy2){
+        let rPath = matrixMaze([rx1,cy1+1], end, path + 'R');
+        arr = arr.concat(rPath);
+    }
+    
+    if(rx1 < rx2){
+        let dPath = matrixMaze([rx1+1,cy1], end, path + 'D');
+        arr = arr.concat(dPath);
+    }
+   
+    return arr;
+}
+
+// let a = matrixMaze([0,0],[2,2]);
+// console.log(a); //[ 'RRDD', 'RDRD', 'RDDR', 'DRRD', 'DRDR', 'DDRR' ]
