@@ -132,3 +132,48 @@ function mazePathCount(start, end){
 
 // let a = mazePathCount([0,0],[2,2]);
 // console.log(a);
+
+
+// print all possible paths from start to end in matrix maze
+// along with diagonal moves
+function mazeWithDiagonalMove(start, end, path = ''){
+    console.log("matrixMaze(",start,",",path,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        let a = [];
+        a.push(path);
+        return a;
+    }
+
+    let arr = [];
+    if(cy1 < cy2){
+        let r = mazeWithDiagonalMove([rx1,cy1+1], end, path + 'R');
+        arr = arr.concat(r);
+    }
+    
+    if(rx1 < rx2){
+        let D = mazeWithDiagonalMove([rx1+1,cy1], end, path+'D');
+        arr = arr.concat(D);
+    }
+
+    if(rx1 < rx2 && cy1 < cy2){
+        let d =  mazeWithDiagonalMove([rx1+1,cy1+1], end, path+'d');
+        arr = arr.concat(d);
+    }
+   
+    return arr;
+}
+
+// let a = mazeWithDiagonalMove([0,0],[2,2]);
+// console.log(a);
+/* [
+  'RRDD', 'RDRD', 'RDDR',
+  'RDd',  'RdD',  'DRRD',
+  'DRDR', 'DRd',  'DDRR',
+  'DdR',  'dRD',  'dDR',
+  'dd'
+] */
