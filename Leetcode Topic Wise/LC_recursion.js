@@ -104,3 +104,31 @@ function matrixMaze(start, end, path=''){
 
 // let a = matrixMaze([0,0],[2,2]);
 // console.log(a); //[ 'RRDD', 'RDRD', 'RDDR', 'DRRD', 'DRDR', 'DDRR' ]
+
+
+// print count of all possible paths from start to end in matrix
+function mazePathCount(start, end){
+    console.log("matrixMaze(",start,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        return 1;
+    }
+
+    let sum=0;
+    if(cy1 < cy2){
+        sum = sum + mazePathCount([rx1,cy1+1], end);
+    }
+    
+    if(rx1 < rx2){
+        sum = sum + mazePathCount([rx1+1,cy1], end);
+    }
+   
+    return sum;
+}
+
+// let a = mazePathCount([0,0],[2,2]);
+// console.log(a);
