@@ -74,7 +74,7 @@ function diceRollsForTargetSum(p,target){
 // console.log(ans);
 
 
-// print all possible paths from start to end in matrix
+// print all possible paths from start to end in matrix maze
 function matrixMaze(start, end, path=''){
     console.log("matrixMaze(",start,",",path,")");
     let rx1 = start[0];
