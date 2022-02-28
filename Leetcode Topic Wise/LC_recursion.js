@@ -177,3 +177,46 @@ function mazeWithDiagonalMove(start, end, path = ''){
   'DdR',  'dRD',  'dDR',
   'dd'
 ] */
+
+
+// print all possible paths from start to end in matrix maze
+// along with diagonal moves with obstacles
+function mazeWithObstacles(maze, start, end, path = ''){
+    console.log("mazeWithObstacles(",path,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        let a = [];
+        a.push(path);
+        return a;
+    }
+
+    let arr = [];
+    if(maze[rx1][cy1] != 0){
+
+        if(cy1 < cy2){
+            let r = mazeWithObstacles(maze, [rx1,cy1+1], end, path + 'R');
+            arr = arr.concat(r);
+        }
+        
+        if(rx1 < rx2){
+            let D = mazeWithObstacles(maze,[rx1+1,cy1], end, path+'D');
+            arr = arr.concat(D);
+        }
+
+        if(rx1 < rx2 && cy1 < cy2){
+            let d =  mazeWithObstacles(maze,[rx1+1,cy1+1], end, path+'d');
+            arr = arr.concat(d);
+        }
+    }
+   
+    return arr;
+}
+
+let matrix = [[1,1,1],[1,0,1],[1,1,1]];
+
+// let a = mazeWithObstacles(matrix, [0,0], [2,2]);
+// console.log(a); // [ 'RRDD', 'RdD', 'DDRR', 'DdR' ]
