@@ -220,3 +220,52 @@ let matrix = [[1,1,1],[1,0,1],[1,1,1]];
 
 // let a = mazeWithObstacles(matrix, [0,0], [2,2]);
 // console.log(a); // [ 'RRDD', 'RdD', 'DDRR', 'DdR' ]
+
+// print all possible paths from start to end in matrix maze
+// take up, left, right, down
+function mazeWithAllDirections(maze, start, end, path = ''){
+    console.log("mazeWithAllDirections(",path,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        let a = [];
+        a.push(path);
+        return a;
+    }
+
+    let arr = [];
+
+    if(cy1 < maze[0].length-1 && maze[rx1][cy1+1]){ // check if visited
+        maze[rx1][cy1+1] = 0; // mark as visited
+        let r = mazeWithAllDirections(maze, [rx1,cy1+1], end, path + 'R');
+        arr = arr.concat(r);
+    }
+    
+    if(cy1 > 0 && maze[rx1][cy1-1]){
+        maze[rx1][cy1-1] = 0;
+        let l = mazeWithAllDirections(maze, [rx1,cy1-1], end, path + 'L');
+        arr = arr.concat(l);
+    }
+    
+    if(rx1 <  maze.length - 1 && maze[rx1+1][cy1]){
+        maze[rx1+1][cy1] = 0;
+        let D = mazeWithAllDirections(maze,[rx1+1,cy1], end, path+'D');
+        arr = arr.concat(D);
+    }
+    
+    if(rx1 > 0 && maze[rx1-1][cy1]){
+        maze[rx1-1][cy1] = 0;
+        let U = mazeWithAllDirections(maze,[rx1-1,cy1], end, path+'U');
+        arr = arr.concat(U);
+    }
+   
+    return arr;
+}
+
+let matrix = [[1,1,1],[1,1,1],[1,1,1]];
+
+// let a = mazeWithAllDirections(matrix, [1,2], [0,0]);
+// console.log(a); //[ 'LRDLLUU' ]
