@@ -221,6 +221,8 @@ let matrix = [[1,1,1],[1,0,1],[1,1,1]];
 // let a = mazeWithObstacles(matrix, [0,0], [2,2]);
 // console.log(a); // [ 'RRDD', 'RdD', 'DDRR', 'DdR' ]
 
+
+
 // print all possible paths from start to end in matrix maze
 // take up, left, right, down
 function mazeWithAllDirections(maze, start, end, path = ''){
@@ -238,28 +240,32 @@ function mazeWithAllDirections(maze, start, end, path = ''){
 
     let arr = [];
 
-    if(cy1 < maze[0].length-1 && maze[rx1][cy1+1]){ // check if visited
-        maze[rx1][cy1+1] = 0; // mark as visited
-        let r = mazeWithAllDirections(maze, [rx1,cy1+1], end, path + 'R');
-        arr = arr.concat(r);
-    }
-    
     if(cy1 > 0 && maze[rx1][cy1-1]){
         maze[rx1][cy1-1] = 0;
         let l = mazeWithAllDirections(maze, [rx1,cy1-1], end, path + 'L');
         arr = arr.concat(l);
+        maze[rx1][cy1-1] = 1;
+    }
+
+    if(cy1 < maze[0].length-1 && maze[rx1][cy1+1]){ // check if visited
+        maze[rx1][cy1+1] = 0; // mark as visited
+        let r = mazeWithAllDirections(maze, [rx1,cy1+1], end, path + 'R');
+        arr = arr.concat(r);
+        maze[rx1][cy1+1] = 1;
+    }
+
+    if(rx1 > 0 && maze[rx1-1][cy1]){
+        maze[rx1-1][cy1] = 0;
+        let U = mazeWithAllDirections(maze,[rx1-1,cy1], end, path+'U');
+        arr = arr.concat(U);
+        maze[rx1-1][cy1] = 1;
     }
     
     if(rx1 <  maze.length - 1 && maze[rx1+1][cy1]){
         maze[rx1+1][cy1] = 0;
         let D = mazeWithAllDirections(maze,[rx1+1,cy1], end, path+'D');
         arr = arr.concat(D);
-    }
-    
-    if(rx1 > 0 && maze[rx1-1][cy1]){
-        maze[rx1-1][cy1] = 0;
-        let U = mazeWithAllDirections(maze,[rx1-1,cy1], end, path+'U');
-        arr = arr.concat(U);
+        maze[rx1+1][cy1] = 1; // restoring the matrix state
     }
    
     return arr;
@@ -267,5 +273,16 @@ function mazeWithAllDirections(maze, start, end, path = ''){
 
 let matrix = [[1,1,1],[1,1,1],[1,1,1]];
 
-// let a = mazeWithAllDirections(matrix, [1,2], [0,0]);
-// console.log(a); //[ 'LRDLLUU' ]
+let a = mazeWithAllDirections(matrix, [0,0], [2,2]);
+console.log(a);
+/*
+[
+  'RLDRRD',   'RLDRDR',   'RLDDRR',
+  'RLDDRURD', 'RRDLLDRR', 'RRDLDR',
+  'RRDD',     'RDLDRR',   'RDRD',
+  'RDDR',     'DRRD',     'DRURDD',
+  'DRDR',     'DURRDLDR', 'DURRDD',
+  'DURDRD',   'DURDDR',   'DDRR',
+  'DDRURD',   'DDRUURDD'
+]
+*/
