@@ -330,65 +330,6 @@ function backtrackingWithNumbering(maze, start, end, path = '', i=1){
             arr = arr.concat(l);
         }
 
-        i=i-1;
-        maze[rx1][cy1] = 0; // restoring the matrix state
-        
-    }
-   
-    return arr;
-}
-
-let matrix = [[0,0,0],[0,0,0],[0,0,0]];
-
-
-
-
-let a = backtrackingWithNumbering(matrix, [0,0], [2,2]);
-console.log(a);
-// print all possible paths from start to end in matrix maze
-// take directions up, left, right, down
-// and number the path
-function backtrackingWithNumbering(maze, start, end, path = '', i=1){
-    let rx1 = start[0];
-    let cy1 = start[1];
-    let rx2 = end[0];
-    let cy2 = end[1];
-
-    if(rx1 == rx2 && cy1 == cy2){
-        maze[rx1][cy1] = i; // mark final destination visited
-        console.log("backtrackingWithNumbering(",maze,")");
-        let a = [];
-        a.push(path);
-        return a;
-    }
-
-    let arr = [];
-
-    if(!maze[rx1][cy1]){
-
-        maze[rx1][cy1] = i; // mark as visited
-
-        if(rx1 <  maze.length - 1){
-            let D = backtrackingWithNumbering(maze,[rx1+1,cy1], end, path+'D',i+1);
-            arr = arr.concat(D);
-        }
-
-        if(cy1 < maze[0].length-1){ // check if visited
-            let r = backtrackingWithNumbering(maze, [rx1,cy1+1], end, path + 'R',i+1);
-            arr = arr.concat(r);
-        }
-
-        if(rx1 > 0){
-            let U = backtrackingWithNumbering(maze,[rx1-1,cy1], end, path+'U',i+1);
-            arr = arr.concat(U);
-        }
-
-        if(cy1 > 0){
-            let l = backtrackingWithNumbering(maze, [rx1,cy1-1], end, path + 'L',i+1);
-            arr = arr.concat(l);
-        }
-
-        i=i-1;
         maze[rx1][cy1] = 0; // restoring the matrix state
         
     }
@@ -400,5 +341,3 @@ let matrix = [[0,0,0],[0,0,0],[0,0,0]];
 
 // let a = backtrackingWithNumbering(matrix, [0,0], [2,2]);
 // console.log(a);
-
-
