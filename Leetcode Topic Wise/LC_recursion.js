@@ -223,6 +223,7 @@ let matrix = [[1,1,1],[1,0,1],[1,1,1]];
 
 
 
+
 // print all possible paths from start to end in matrix maze
 // take up, left, right, down
 function backtracking(maze, start, end, path = ''){
@@ -240,29 +241,85 @@ function backtracking(maze, start, end, path = ''){
 
     let arr = [];
 
-    maze[rx1][cy1] = 0;
+    if(maze[rx1][cy1]){
 
-    if(cy1 > 0 && maze[rx1][cy1-1]){
-        let l = backtracking(maze, [rx1,cy1-1], end, path + 'L');
-        arr = arr.concat(l);
+        maze[rx1][cy1] = 0;
+
+        if(rx1 <  maze.length - 1){
+            let D = backtracking(maze,[rx1+1,cy1], end, path+'D');
+            arr = arr.concat(D);
+        }
+
+        if(cy1 < maze[0].length-1){ // check if visited
+            let r = backtracking(maze, [rx1,cy1+1], end, path + 'R');
+            arr = arr.concat(r);
+        }
+
+        if(rx1 > 0){
+            let U = backtracking(maze,[rx1-1,cy1], end, path+'U');
+            arr = arr.concat(U);
+        }
+
+        if(cy1 > 0){
+            let l = backtracking(maze, [rx1,cy1-1], end, path + 'L');
+            arr = arr.concat(l);
+        }
+
+        maze[rx1][cy1] = 1; // restoring the matrix state
+        
+    }
+   
+    return arr;
+}
+
+let matrix = [[1,1,1],[1,1,1],[1,1,1]];
+
+let a = backtracking(matrix, [0,0], [2,2]);
+console.log(a);
+// print all possible paths from start to end in matrix maze
+// take up, left, right, down
+function backtracking(maze, start, end, path = ''){
+    console.log("backtracking(",path,")");
+    let rx1 = start[0];
+    let cy1 = start[1];
+    let rx2 = end[0];
+    let cy2 = end[1];
+
+    if(rx1 == rx2 && cy1 == cy2){
+        let a = [];
+        a.push(path);
+        return a;
     }
 
-    if(cy1 < maze[0].length-1 && maze[rx1][cy1+1]){ // check if visited
-        let r = backtracking(maze, [rx1,cy1+1], end, path + 'R');
-        arr = arr.concat(r);
-    }
+    let arr = [];
 
-    if(rx1 > 0 && maze[rx1-1][cy1]){
-        let U = backtracking(maze,[rx1-1,cy1], end, path+'U');
-        arr = arr.concat(U);
-    }
-    
-    if(rx1 <  maze.length - 1 && maze[rx1+1][cy1]){
-        let D = backtracking(maze,[rx1+1,cy1], end, path+'D');
-        arr = arr.concat(D);
-    }
+    if(maze[rx1][cy1]){
 
-    maze[rx1][cy1] = 1; // restoring the matrix state
+        maze[rx1][cy1] = 0;
+
+        if(rx1 <  maze.length - 1){
+            let D = backtracking(maze,[rx1+1,cy1], end, path+'D');
+            arr = arr.concat(D);
+        }
+
+        if(cy1 < maze[0].length-1){ // check if visited
+            let r = backtracking(maze, [rx1,cy1+1], end, path + 'R');
+            arr = arr.concat(r);
+        }
+
+        if(rx1 > 0){
+            let U = backtracking(maze,[rx1-1,cy1], end, path+'U');
+            arr = arr.concat(U);
+        }
+
+        if(cy1 > 0){
+            let l = backtracking(maze, [rx1,cy1-1], end, path + 'L');
+            arr = arr.concat(l);
+        }
+
+        maze[rx1][cy1] = 1; // restoring the matrix state
+        
+    }
    
     return arr;
 }
@@ -273,12 +330,12 @@ let matrix = [[1,1,1],[1,1,1],[1,1,1]];
 // console.log(a);
 /*
 [
-  'RRDLLDRR', 'RRDLDR',
-  'RRDD',     'RDLDRR',
-  'RDRD',     'RDDR',
+  'DDRR',     'DDRURD',
+  'DDRUURDD', 'DRDR',
   'DRRD',     'DRURDD',
-  'DRDR',     'DDRR',
-  'DDRURD',   'DDRUURDD'
+  'RDDR',     'RDRD',
+  'RDLDRR',   'RRDD',
+  'RRDLDR',   'RRDLLDRR'
 ]
 */
 
