@@ -341,3 +341,56 @@ let matrix = [[0,0,0],[0,0,0],[0,0,0]];
 
 // let a = backtrackingWithNumbering(matrix, [0,0], [2,2]);
 // console.log(a);
+
+
+// N-QUEENS
+function nQueens(matrix, r){
+    console.log("nQueens(",matrix,")");
+    if(r == matrix.length){
+        console.log("solution(",matrix,")");
+        return 1;
+    }
+
+    let count = 0;
+    for(let col=0; col<matrix[0].length; col++){
+        if(isSafe(matrix,r,col)){
+            matrix[r][col] = 1;
+            count = count + nQueens(matrix, r+1);
+            matrix[r][col] = 0;
+        }
+    }
+
+    return count;
+}
+
+function isSafe(matrix, r, c){
+   
+    // check diagonally left
+    for(let col=c-1,row=r-1; col>=0 && row>=0; col--,row--){
+        if(matrix[row][col]){
+            return false;
+        }
+    }
+
+    // check vertically up
+    for(let row=r-1;row>=0;row--){
+        if(matrix[row][c]){
+            return false;
+        }
+    }
+
+    // check diagonally right
+    for(let col=c+1,row=r-1; col<matrix[0].length && row>=0; col++,row--){
+        if(matrix[row][col]){
+            return false;
+        }
+    }
+
+    return true;
+    
+}
+
+// let board = [ [0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0] ] // 4x4
+// let ans = nQueens(board, 0);
+// console.log(ans);
+
