@@ -363,6 +363,7 @@ function nQueens(matrix, r){
     return count;
 }
 
+// check queens in previous rows
 function isSafe(matrix, r, c){
    
     // check diagonally left
