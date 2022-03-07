@@ -344,6 +344,11 @@ let matrix = [[0,0,0],[0,0,0],[0,0,0]];
 
 
 // N-QUEENS
+/*
+ Space Complexity - O(n*n)
+ Time Complexity - O(n!)
+ Recurrence relation - T(n) = n*T(n-1) + O(n*2)
+ */
 function nQueens(matrix, r){
     console.log("nQueens(",matrix,")");
     if(r == matrix.length){
