@@ -400,3 +400,73 @@ function isSafe(matrix, r, c){
 // let ans = nQueens(board, 0);
 // console.log(ans);
 
+
+// N-KNIGHTS
+function nKnights(matrix, r, c, k){
+    //console.log("nKnights(",matrix,r,c,k,")");
+    if(k == 0){
+        console.log("solution(",matrix,r,c,k,")");
+        return;
+    }
+
+    if(r == matrix.length - 1 && c == matrix[0].length){
+        return;
+    }
+
+    if(c == matrix[0].length){
+        nKnights(matrix, r+1, 0, k);
+        return;
+    }
+
+    if(isSafe(matrix,r,c)){
+        matrix[r][c] = 1;
+        nKnights(matrix, r, c+1, k-1);
+        matrix[r][c] = 0;
+    }
+
+    nKnights(matrix, r, c+1, k);
+
+
+}
+
+function isSafe(matrix, r, c){
+
+    let row = r, col = c;
+
+        // check up-right
+    row = r - 1;
+    col = c + 2;
+    if(isValid(matrix,row,col) && matrix[row][col]){
+        return false;
+    }
+
+    row = r - 2;
+    col = c + 1;
+    if(isValid(matrix,row,col) && matrix[row][col]){
+        return false;
+    }
+
+    // check up-left
+    row = r - 1;
+    col = c - 2;
+    if(isValid(matrix,row,col) && matrix[row][col]){
+        return false;
+    }
+    row = r - 2;
+    col = c - 1;
+    if(isValid(matrix,row,col) && matrix[row][col]){
+        return false;
+    }
+
+    return true;
+    
+}
+
+function isValid(matrix, r, c){
+    return (r>=0 && c < matrix[0].length && c>=0);
+}
+
+// let board = [ [0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0] ] // 4x4
+// let ans = nKnights(board, 0, 0, 4);
+// console.log(ans);
+
