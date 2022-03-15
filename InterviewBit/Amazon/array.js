@@ -20,3 +20,30 @@ function repeatedNumber(A){
 		}
 		return num;
 }
+
+
+/*
+ * #2
+ * https://www.interviewbit.com/problems/rotate-matrix/
+ */
+
+//param A : array of array of integers 
+//return nothing 
+// solution using extra space
+function rotateMatrix(A){ 
+	let B = [];
+	
+	for(let j=0;j<A[0].length;j++){
+	    B[j] = [];
+	    for(let i=A.length-1;i>=0;i--){
+		B[j].push(A[i][j]);
+	    }
+	}
+
+	for(let i=0;i<A.length;i++){
+	    for(let j=0;j<A[0].length;j++){
+		A[i][j] = B[i][j];
+	    }
+	}
+} 
+   
