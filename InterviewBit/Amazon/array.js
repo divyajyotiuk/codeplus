@@ -46,4 +46,17 @@ function rotateMatrix(A){
 	    }
 	}
 } 
+// optimized (swap along the diagonal)
+// in place solution (no extra space)
+function rotateMatrix(A){ 
+	A = A.reverse();
+	for(let i=0;i<A.length;i++){
+		for(let j=0;j<i;j++){
+ 			let temp = A[i][j];
+			A[i][j] = A[j][i];
+			A[j][i] = temp;
+		}
+	}
+
+}
    
