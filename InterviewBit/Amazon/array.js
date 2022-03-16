@@ -59,4 +59,35 @@ function rotateMatrix(A){
 	}
 
 }
+
+
+/*
+ * #3
+ * https://www.interviewbit.com/problems/max-sum-contiguous-subarray/
+ */
+
+//param A : array of integers
+//return an integer
+// greedy Kadane's algorithm
+function maxSubArray(A){
+    
+    let n = A.length;
+    let maxSoFar = -9999, maxEndingHere = 0;
+
+    for(let i=0;i<n;i++){
+        maxEndingHere = maxEndingHere + A[i];
+
+        if(maxSoFar < maxEndingHere){
+            maxSoFar = maxEndingHere;
+        }
+
+        if(maxEndingHere < 0){
+            maxEndingHere = 0;
+        }
+    }
+
+    return maxSoFar;
+
+}
+   
    
