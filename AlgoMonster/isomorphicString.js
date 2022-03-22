@@ -1,6 +1,6 @@
 /*
   https://algo.monster/problems/isomorphic_string
- 
+  
   #1
   Input:
   str_1 = "egg"
@@ -17,6 +17,8 @@
   Output: 
   false
 
+  Time complexity - O(n)
+  n = length of the string
  */
 
 function isIsomorphic(str1, str2) {
