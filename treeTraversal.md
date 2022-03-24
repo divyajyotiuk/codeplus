@@ -12,7 +12,7 @@ Traversals in Trees
 function preorder(root){
   if(root == null) return;
   
-  console.log(root.val, ' ');
+  console.log(root.val);
   
   preorder(root.left);
   preorder(root.right);
@@ -25,7 +25,7 @@ function inorder(root){
   if(root == null) return;
   
   inorder(root.left);
-  console.log(root.val, ' ');
+  console.log(root.val);
   inorder(root.right);
 }
 ```
@@ -37,6 +37,6 @@ function postorder(root){
   
   postorder(root.left);
   postorder(root.right);
-  console.log(root.val, ' ');
+  console.log(root.val);
 }
 ```
