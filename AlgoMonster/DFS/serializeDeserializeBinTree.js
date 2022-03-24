@@ -12,12 +12,16 @@ binTree.left.left = new Node(3);
 binTree.left.right = new Node(5);
 binTree.right = new Node(8);
 
+// we are doing preorder traversal
+// root left right
 function serialize(root) {
     if(root == null) return 'x';
     
     return root.val + ' ' + serialize(root.left) + ' ' + serialize(root.right);
 }
 
+// we are doing preorder traversal
+// root left right
 function deserialize(s) {
     let list = s.split(' ');
 
