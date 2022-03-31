@@ -31,5 +31,13 @@ function invertBinaryTree(tree) {
     return dfs(tree);
 }
 
+function invertBinaryTreeWithoutTemp(root) {
+    if(root == null){
+        return root;
+    }
+    
+    return new Node(root.val, invertBinaryTreeWithoutTemp(root.right), invertBinaryTreeWithoutTemp(root.left) );
+}
+
 let tree = invertBinaryTree(binTree);
 console.log(tree);
