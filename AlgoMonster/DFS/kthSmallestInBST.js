@@ -34,5 +34,55 @@ function kthSmallest(bst, k) {
     return kSmall;
 }
 
+// Time complexity O(h+k)
+function kthSmallestOpt(bst, k) {
+    let num = 0;
+
+    let inorder = function(root, k){
+        if(root == null){
+            return null;
+        }
+        
+        let left = inorder(root.left, k);
+        if(left){ 
+            return left; 
+        }
+        num = num + 1;
+        if(root && k == num){
+            return root.val;
+        }
+
+        return inorder(root.right, k);
+        
+    }
+    
+    return inorder(bst, k);
+}
+
+// Using try catch
+function kthSmallestOpt(bst, k) {
+
+    try {
+        let num = 0;
+        let inorder = function(root, k){
+            if(root == null) return;
+
+            inorder(root.left, k);
+
+            num = num + 1;
+
+            if(num == k){
+                throw root.val;
+            }
+
+            inorder(root.right, k);
+        }
+
+        inorder(bst, k);
+    } catch (kthSmallestVal) {
+        return kthSmallestVal;
+    }
+}
+
 let val = kthSmallest(binTree, 2);
 console.log(val);
